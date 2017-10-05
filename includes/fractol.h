@@ -12,6 +12,7 @@
 
 typedef struct	s_map
 {
+	int		id;
 	int		width;
 	int		length;
 	int		*mlx;
@@ -31,11 +32,12 @@ typedef struct	s_map
 	int		posx;
 	int		posy;
 	int		iter;
+	float	mR;
+	float	mI;
 }				t_map;
 
 int				ft_hook_mouse_zoom(int key, int x, int y, t_map *map);
 int				ft_hook_basic_keys(int key, t_map *map);
-void			ft_set_values(t_map *map);
-void			ft_map_setup(t_map *map);
+int				ft_goto_id(t_map *map);
 void			ft_map_display(t_map *map);
 #endif

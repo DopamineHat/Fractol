@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 13:06:15 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/05 20:53:36 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/05 23:15:17 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int		ft_hook_pos_keys(int key, t_map *map)
 	//	mlx_put_image_to_window(map->mlx, map->win, map->blackscreen,
 	//			0, 0);
 			map->posy -= 10;
-			ft_map_setup(map);
+			ft_goto_id(map);
 	}
 	if (key == KEY_S)
 	{
@@ -30,7 +30,7 @@ static int		ft_hook_pos_keys(int key, t_map *map)
 	//	mlx_put_image_to_window(map->mlx, map->win, map->blackscreen,
 	//			0, 0);
 		map->posy += 10;
-		ft_map_setup(map);
+		ft_goto_id(map);
 	}
 	return(0);
 }
@@ -44,7 +44,7 @@ static int		ft_hook_pos_keys2(int key, t_map *map)
 	//	mlx_put_image_to_window(map->mlx, map->win, map->blackscreen,
 	//			0, 0);
 		map->posx -= 10;
-		ft_map_setup(map);
+		ft_goto_id(map);
 	}
 	if (key == KEY_D)
 	{
@@ -53,7 +53,7 @@ static int		ft_hook_pos_keys2(int key, t_map *map)
 	//	mlx_put_image_to_window(map->mlx, map->win, map->blackscreen,
 	//			0, 0);
 		map->posx += 10;
-		ft_map_setup(map);
+		ft_goto_id(map);
 	}
 	return (0);
 }
@@ -69,7 +69,7 @@ int		ft_hook_mouse_zoom(int key, int x, int y, t_map *map)
 		x = x;
 		y = y;
 		map->zoom *= 1.1;
-		ft_map_setup(map);
+		ft_goto_id(map);
 	}
 	return (0);
 }

@@ -6,18 +6,21 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 01:58:05 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/05 21:08:51 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/06 00:36:07 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-void	ft_map_process(int x, int y, int i, int *addr, t_map *map)
+
+static void	ft_julia_process(int x, int y, int *addr, t_map *map)
 {
+	int i;
+
 	while (y < map->length)
 	{
 		while(x < map->width)
 		{
-			map->vRe = 3 * (x - map->width * .5) / (map->zoom * map->width) ;
+			map->vRe = 3 * (x - map->width * .5) / (map->zoom * map->width);
 			map->vIm = 2 * (y - map->length * .5) / (map->zoom * map->length);
 			i = -1;
 			while (++i < map->iter)
@@ -29,7 +32,7 @@ void	ft_map_process(int x, int y, int i, int *addr, t_map *map)
 				if(map->vRe * map->vRe + map->vIm * map->vIm > 4)
 					break;
 			}
-			addr[x + y * map->width] = (i*8 << 16) + (i*2 << 8) + i;
+			addr[x + y * map->width] = (i << 19) + (i << 9) + i;
 			x++;
 		}
 		y++;
@@ -37,7 +40,44 @@ void	ft_map_process(int x, int y, int i, int *addr, t_map *map)
 	}
 }
 
-void	ft_map_setup(t_map *map)
+static	void	ft_set_mandelbroot_values(t_map *map, int x, int y)
+{
+	map->lRe = 0;
+	map->lIm = 0;
+	map->vRe = 0;
+	map->vIm = 0;
+	map->mR = 3 * (x - map->width * .5) / (map->zoom * map->width);
+	map->mI = 2 * (y - map->width * .5) / (map->zoom * map->width);
+}
+
+static	void	ft_mandelbroot_process(int x, int y, int *addr,
+		t_map *map)
+{
+	int i;
+
+	while (y < map->length)
+	{
+		while(x < map->length)
+		{
+			i = -1;
+			ft_set_mandelbroot_values(map, x, y);
+			while (map->vRe * map->vRe + map->vIm
+					* map->vIm < 4 && ++i < map->iter)
+			{
+				map->lRe = map->vRe;
+				map->lIm = map->vIm;
+				map->vRe = map->lRe * map->lRe - map->lIm * map->lIm + map->mR;
+				map->vIm = 2 * map->lRe * map->lIm + map->mI;
+			}
+			addr[x + y * map->width] = (i << 19) + (i << 9) + i;
+			x++;
+		}
+		y++;
+		x = 0;
+	}
+}
+
+int			ft_goto_id(t_map *map)
 {
 	int size_line;
 	int x;
@@ -49,9 +89,14 @@ void	ft_map_setup(t_map *map)
 	y = 0;
 	i = 0;
 	if (!(map->image = mlx_new_image(map->mlx, map->width, map->length)))
-			return ;
-	map->addr = mlx_get_data_addr(map->image, &map->bpp, &size_line, &map->endian);
+			return (1);
+	map->addr = mlx_get_data_addr(map->image, &map->bpp,
+			&size_line, &map->endian);
 	addr = (int *)map->addr;
-	ft_map_process(x, y, i, addr, map);
+	if (map->id == 0)
+		ft_julia_process(x, y, addr, map);
+	if (map->id == 1)
+		ft_mandelbroot_process(x, y, addr, map);
 	mlx_put_image_to_window(map->mlx, map->win, map->image, 0, 0);
+	return (0);
 }
