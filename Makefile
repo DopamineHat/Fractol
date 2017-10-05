@@ -6,11 +6,11 @@
 #    By: adeletan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/16 07:30:41 by adeletan          #+#    #+#              #
-#    Updated: 2017/09/25 20:37:23 by rpagot           ###   ########.fr        #
+#    Updated: 2017/10/05 20:58:12 by rpagot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := fdf
+NAME := fractol
 
 LIBFT = libft/libft.a
 
@@ -19,8 +19,8 @@ CFLAGS := -L./minilibx_macos -lmlx -framework OpenGl -framework AppKit -g3 -fsan
 INCLUDES := -I./minilibx_macos -I./includes -I./libft
 
 SRCS := main.c \
-		ft_parse.c \
-		ft_map.c
+		ft_map_process.c \
+		ft_hook_keys.c
 
 SRCSP := $(addprefix ./srcs/,  $(SRCS))
 OBJS = $(SRCS:.c=.o)
