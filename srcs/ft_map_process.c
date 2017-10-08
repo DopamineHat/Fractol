@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 01:58:05 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/08 06:19:46 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/08 13:05:56 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void	ft_julia_process(int x, int y, int *addr, t_map *map)
 
 	while (y < map->length)
 	{
-		while(x < map->width)
+		x = -1;
+		while(++x < map->width)
 		{
 			map->vRe = 3 * (x - map->width * .5) / (map->zoom * map->width)
 				+ map->posx;
@@ -29,16 +30,15 @@ static void	ft_julia_process(int x, int y, int *addr, t_map *map)
 			{
 				map->lRe = map->vRe;
 				map->lIm = map->vIm;
-				map->vRe = map->lRe * map->lRe - map->lIm * map->lIm + map->cRe;
+				map->vRe = map->lRe * map->lRe - map->lIm * map->lIm 
+					+ map->cRe;
 				map->vIm = map->lRe * map->lIm * 2 + map->cIm;
 				if(map->vRe * map->vRe + map->vIm * map->vIm > 4)
 					break;
 			}
 			addr[x + y * map->width] = (i << 19) + (i << 9) + i;
-			x++;
 		}
 		y++;
-		x = 0;
 	}
 }
 
@@ -48,8 +48,11 @@ static	void	ft_set_mandelbroot_values(t_map *map, int x, int y)
 	map->lIm = 0;
 	map->vRe = 0;
 	map->vIm = 0;
-	map->mR = 3 * (x - map->width * .5) / (map->zoom * map->width);
-	map->mI = 2 * (y - map->width * .5) / (map->zoom * map->width);
+	map->mR = 4 * (x - map->width * .5) / (map->zoom * map->width)
+		+ map->posx;
+	map->mI = 3 * (y - map->width * .5) / (map->zoom * map->width)
+		+ .3
+		+ map->posy;
 }
 
 static	void	ft_mandelbroot_process(int x, int y, int *addr,
@@ -99,6 +102,11 @@ int			ft_goto_id(t_map *map)
 		ft_julia_process(x, y, addr, map);
 	if (map->id == 1)
 		ft_mandelbroot_process(x, y, addr, map);
+	if (map->id == 2)
+	{
+		ft_set_burning_ship(map);
+		ft_burning_ship(x, y, addr, map);
+	}
 	mlx_put_image_to_window(map->mlx, map->win, map->image, 0, 0);
 	return (0);
 }

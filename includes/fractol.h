@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
+#include <math.h>
 
 #include "libft.h"
 #include "key_codes_macos.h"
@@ -12,6 +13,7 @@
 
 typedef struct	s_map
 {
+	int		mousestop;
 	int		id;
 	int		width;
 	int		length;
@@ -36,6 +38,10 @@ typedef struct	s_map
 	float	mI;
 }				t_map;
 
+void			ft_set_burning_ship(t_map *map);
+void			ft_burning_ship(int x, int y, int *addr, t_map *map);
+void			ft_set_values(t_map *map);
+int				ft_mouse_move_hook(int x, int y, t_map *map);
 int				ft_hook_mouse_zoom(int key, int x, int y, t_map *map);
 int				ft_hook_basic_keys(int key, t_map *map);
 int				ft_goto_id(t_map *map);

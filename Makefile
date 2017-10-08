@@ -6,7 +6,7 @@
 #    By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/07 03:17:48 by rpagot            #+#    #+#              #
-#    Updated: 2017/10/07 03:20:12 by rpagot           ###   ########.fr        #
+#    Updated: 2017/10/08 12:57:47 by rpagot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ INCLUDES := -I./minilibx_macos -I./includes -I./libft
 
 SRCS := main.c \
 		ft_map_process.c \
-		ft_hook_keys.c
+		ft_hook_keys.c \
+		ft_burning_ship.c
 
 SRCSP := $(addprefix ./srcs/,  $(SRCS))
 OBJS = $(SRCS:.c=.o)
