@@ -6,17 +6,23 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/08 11:34:12 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/08 15:17:14 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/08 16:53:02 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
-void		ft_set_burning_ship(t_map *map)
+static void		ft_set_burning_ship(t_map *map, int x, int y)
 {
 	map->lRe = 0;
 	map->lIm = 0;
+	map->vIm = 0;
+	map->vRe = 0;
+	map->mR = 6 * (x - map->width * .5) / (map->zoom * map->width)
+		+ map->posx;
+	map->mI = 5 * (y - map->width * .5) / (map->zoom * map->width)
+		+ .3
+		+ map->posy;
 }
 
 void		ft_burning_ship(int x, int y, int *addr, t_map *map)
@@ -25,32 +31,23 @@ void		ft_burning_ship(int x, int y, int *addr, t_map *map)
 
 	while (y < map->length)
 	{
-		x = -1;
-		while (++x < map->width)
+		while(x < map->width)
 		{
-			map->cRe = (x - map->width / 2) / (.5 * map->zoom * map->width)
-				+ map->posx;
-			map->cIm = (y - map->width / 2) / (.5 * map->zoom * map->width)
-				+ map->posy;
 			i = -1;
-//			printf("%f", map->cRe);
-			while (++i < map->iter && map->lRe * map->lRe + map->lIm
-					* map->lIm < 4)
+			ft_set_burning_ship(map, x, y);
+			while (map->vRe * map->vRe + map->vIm
+					* map->vIm < 4 && ++i < map->iter)
 			{
-//	printf("%f", map->vRe);
-				map->vRe = map->lRe * map->lRe - map->lIm * map->lIm
-					- map->cRe;
-				map->vIm = 2 * fabsf(map->lIm) * fabsf(map->lRe) + map->cIm;
 				map->lRe = map->vRe;
-//				printf("%f", map->lRe * map->lRe + map->lIm
-//					* map->lIm);
-
+				map->lIm = map->vIm;
+				map->vRe = fabsf(map->lRe * map->lRe - map->lIm * map->lIm) + map->mR;
+				map->vIm = 2 * fabsf(map->lRe * map->lIm) + map->mI;
 			}
-			printf("%d", i);
 			addr[x + y * map->width] = (i << 19) + (i << 9) + i;
-//			printf("%d", map->lRe * map->lRe + map->lIm
-//					* map->lIm < 4);
+			x++;
 		}
 		y++;
+		x = 0;
 	}
 }
+

@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 01:58:05 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/08 13:05:56 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/08 16:49:16 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,7 @@ int			ft_goto_id(t_map *map)
 	if (map->id == 1)
 		ft_mandelbroot_process(x, y, addr, map);
 	if (map->id == 2)
-	{
-		ft_set_burning_ship(map);
 		ft_burning_ship(x, y, addr, map);
-	}
 	mlx_put_image_to_window(map->mlx, map->win, map->image, 0, 0);
 	return (0);
 }

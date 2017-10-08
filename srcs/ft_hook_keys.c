@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 13:06:15 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/08 11:24:57 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/08 16:56:32 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int		ft_hook_mouse_zoom(int key, int x, int y, t_map *map)
 	{
 		map->mousestop = 1;
 		map->zoom *= 1.2;
-		map->posx += ((float)x - ((float)map->width / 2)) / ((float)map->width
+		map->posx += ((float)x - ((float)map->width / 2))  / ((float)map->width
 			* map->zoom);
-		map->posy += ((float)y - ((float)map->width / 2)) / ((float)map->length
+		map->posy += ((float)y - ((float)map->width / 2))  / ((float)map->length
 			* map->zoom);
 		ft_goto_id(map);
 	}

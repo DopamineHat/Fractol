@@ -38,7 +38,6 @@ typedef struct	s_map
 	float	mI;
 }				t_map;
 
-void			ft_set_burning_ship(t_map *map);
 void			ft_burning_ship(int x, int y, int *addr, t_map *map);
 void			ft_set_values(t_map *map);
 int				ft_mouse_move_hook(int x, int y, t_map *map);
