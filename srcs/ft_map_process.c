@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 01:58:05 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/06 00:36:07 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/08 06:19:46 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ static void	ft_julia_process(int x, int y, int *addr, t_map *map)
 	{
 		while(x < map->width)
 		{
-			map->vRe = 3 * (x - map->width * .5) / (map->zoom * map->width);
-			map->vIm = 2 * (y - map->length * .5) / (map->zoom * map->length);
+			map->vRe = 3 * (x - map->width * .5) / (map->zoom * map->width)
+				+ map->posx;
+			map->vIm = 2 * (y - map->length * .5) / (map->zoom * map->length)
+				+ map->posy;
 			i = -1;
 			while (++i < map->iter)
 			{
@@ -57,7 +59,7 @@ static	void	ft_mandelbroot_process(int x, int y, int *addr,
 
 	while (y < map->length)
 	{
-		while(x < map->length)
+		while(x < map->width)
 		{
 			i = -1;
 			ft_set_mandelbroot_values(map, x, y);

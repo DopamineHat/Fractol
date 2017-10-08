@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adeletan <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/03/16 07:30:41 by adeletan          #+#    #+#              #
-#    Updated: 2017/10/05 20:58:12 by rpagot           ###   ########.fr        #
+#    Created: 2017/10/07 03:17:48 by rpagot            #+#    #+#              #
+#    Updated: 2017/10/07 03:20:12 by rpagot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME := fractol
 
 LIBFT = libft/libft.a
 
-CFLAGS := -L./minilibx_macos -lmlx -framework OpenGl -framework AppKit -g3 -fsanitize=address
+CFLAGS := -Ofast -march=native
+LCFLAGS := -L./minilibx_macos -lmlx -framework OpenGl -framework AppKit -Ofast -march=native
 
 INCLUDES := -I./minilibx_macos -I./includes -I./libft
 
@@ -35,7 +36,7 @@ lib :
 
 
 $(NAME): $(OBJS)
-	gcc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INCLUDES)
+	gcc $(LCFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INCLUDES)
 
 %.o : %.c
 	gcc $(CFLAGS)  $(INCLUDES) -c -o $@ $<

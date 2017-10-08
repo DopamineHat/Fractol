@@ -29,8 +29,8 @@ typedef struct	s_map
 	float	vIm;
 	float	lRe;
 	float	lIm;
-	int		posx;
-	int		posy;
+	float	posx;
+	float	posy;
 	int		iter;
 	float	mR;
 	float	mI;
