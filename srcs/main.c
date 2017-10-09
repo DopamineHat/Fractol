@@ -6,20 +6,23 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 12:11:46 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/09 12:19:03 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/09 16:38:42 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void	ft_parse_name(t_map *map, char *name)
+static int	ft_parse_name(t_map *map, char *name)
 {
 	if (!(ft_strcmp(name, "julia")))
 		map->id = 0;
-	if (!(ft_strcmp(name, "mandelbrot")))
+	else if (!(ft_strcmp(name, "mandelbrot")))
 		map->id = 1;
-	if (!(ft_strcmp(name, "burningship")))
+	else if (!(ft_strcmp(name, "burningship")))
 		map->id = 2;
+	else
+		return (1);
+	return (0);
 }
 
 static void	ft_set_window(t_map *map)
@@ -53,7 +56,11 @@ int			main(int argc, char **argv)
 	}
 	if (!(map = (t_map*)malloc(sizeof(t_map))))
 		return (1);
-	ft_parse_name(map, argv[1]);
+	if (ft_parse_name(map, argv[1]))
+	{
+		ft_putstr_fd("Fractol: invalid argument. \n", 2);
+		return (1);
+	}
 	ft_set_values(map);
 	ft_set_window(map);
 	ft_goto_id(map);

@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 13:06:15 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/09 12:16:04 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/09 16:15:39 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_hook_mouse_zoom(int key, int x, int y, t_map *map)
 	}
 	if (key == BUTTON2)
 	{
-		if (map->zoom > 1)
+		if (map->zoom > .5)
 		{
 			map->zoom *= .9;
 			map->posx += ((float)x - ((float)map->width / 2))
