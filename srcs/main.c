@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 12:11:46 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/08 12:51:50 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/09 12:19:03 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ void		ft_set_values(t_map *map)
 	map->width = 1600;
 	map->length = 1200;
 	map->zoom = 1;
-	map->cRe = -.7;
-	map->cIm = .27015;
+	map->cre = -.7;
+	map->cim = .27015;
 	map->iter = 400;
 	map->posx = 0;
 	map->posy = 0;
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_map	*map;
 

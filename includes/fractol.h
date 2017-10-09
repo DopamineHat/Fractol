@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/09 12:22:24 by rpagot            #+#    #+#             */
+/*   Updated: 2017/10/09 12:23:04 by rpagot           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-#include <mlx.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
-#include <math.h>
+# include <mlx.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <string.h>
+# include <math.h>
 
-#include "libft.h"
-#include "key_codes_macos.h"
-#include "events.h"
+# include "libft.h"
+# include "key_codes_macos.h"
+# include "events.h"
 
 typedef struct	s_map
 {
@@ -25,17 +37,17 @@ typedef struct	s_map
 	int		endian;
 	char	*addr;
 	float	zoom;
-	float	cRe;
-	float	cIm;
-	float	vRe;
-	float	vIm;
-	float	lRe;
-	float	lIm;
+	float	cre;
+	float	cim;
+	float	vre;
+	float	vim;
+	float	lre;
+	float	lim;
 	float	posx;
 	float	posy;
 	int		iter;
-	float	mR;
-	float	mI;
+	float	mr;
+	float	mi;
 }				t_map;
 
 void			ft_burning_ship(int x, int y, int *addr, t_map *map);
