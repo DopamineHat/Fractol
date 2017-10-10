@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/09 12:22:24 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/09 12:23:04 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/10 01:16:15 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 typedef struct	s_map
 {
+	size_t	itermax;
 	int		mousestop;
 	int		id;
 	int		width;
@@ -36,6 +37,8 @@ typedef struct	s_map
 	int		bpp;
 	int		endian;
 	char	*addr;
+	float	centerx;
+	float	centery;
 	float	zoom;
 	float	cre;
 	float	cim;

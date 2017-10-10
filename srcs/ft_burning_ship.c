@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/08 11:34:12 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/09 12:17:27 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/09 22:04:56 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@ static void		ft_set_burning_ship(t_map *map, int x, int y)
 	map->lim = 0;
 	map->vim = 0;
 	map->vre = 0;
-	map->mr = 6 * (x - map->width * .5) / (map->zoom * map->width)
-		+ map->posx;
-	map->mi = 5 * (y - map->width * .5) / (map->zoom * map->width)
-		+ .3
-		+ map->posy;
+	map->mr = x * map->zoom / map->width + map->centerx;
+	map->mi = y * map->zoom / map->width + map->centery;
 }
 
 void			ft_burning_ship(int x, int y, int *addr, t_map *map)
@@ -40,7 +37,7 @@ void			ft_burning_ship(int x, int y, int *addr, t_map *map)
 			{
 				map->lre = map->vre;
 				map->lim = map->vim;
-				map->vre = fabsf(map->lre * map->lre - map->lim * map->lim)
+				map->vre = (map->lre * map->lre) - (map->lim * map->lim)
 					+ map->mr;
 				map->vim = 2 * fabsf(map->lre * map->lim) + map->mi;
 			}

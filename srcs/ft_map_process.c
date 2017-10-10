@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/01 01:58:05 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/09 12:16:40 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/10 03:40:56 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ static void		ft_julia_process(int x, int y, int *addr, t_map *map)
 		x = -1;
 		while (++x < map->width)
 		{
-			map->vre = 3 * (x - map->width * .5) / (map->zoom * map->width)
-				+ map->posx;
-			map->vim = 2 * (y - map->length * .5) / (map->zoom * map->length)
-				+ map->posy;
+			map->vre = x * map->zoom / map->width + map->centerx;
+			map->vim = y * map->zoom / map->width + map->centery;
 			i = -1;
 			while (++i < map->iter
 					&& map->vre * map->vre + map->vim * map->vim < 4)
@@ -47,11 +45,8 @@ static	void	ft_set_mandelbroot_values(t_map *map, int x, int y)
 	map->lim = 0;
 	map->vre = 0;
 	map->vim = 0;
-	map->mr = 4 * (x - map->width * .5) / (map->zoom * map->width)
-		+ map->posx;
-	map->mi = 3 * (y - map->width * .5) / (map->zoom * map->width)
-		+ .3
-		+ map->posy;
+	map->mr = x * map->zoom / map->width + map->centerx;
+	map->mi = y * map->zoom / map->width + map->centery;
 }
 
 static	void	ft_mandelbroot_process(int x, int y, int *addr,
@@ -92,7 +87,8 @@ int				ft_goto_id(t_map *map)
 	x = 0;
 	y = 0;
 	i = 0;
-	if (!(map->image = mlx_new_image(map->mlx, map->width, map->length)))
+	if (!(map->image = mlx_new_image(map->mlx, map->width, map->length))
+				|| map->iter > map->itermax)
 		return (1);
 	map->addr = mlx_get_data_addr(map->image, &map->bpp,
 			&size_line, &map->endian);
@@ -104,5 +100,7 @@ int				ft_goto_id(t_map *map)
 	if (map->id == 2)
 		ft_burning_ship(x, y, addr, map);
 	mlx_put_image_to_window(map->mlx, map->win, map->image, 0, 0);
+	if (map->mousestop == 1)
+		map->iter *= 2;
 	return (0);
 }

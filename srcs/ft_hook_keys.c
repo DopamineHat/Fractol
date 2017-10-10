@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 13:06:15 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/09 16:15:39 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/10 03:40:23 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,36 @@ int		ft_hook_mouse_zoom(int key, int x, int y, t_map *map)
 	if (key == BUTTON1)
 	{
 		map->mousestop = 1;
-		map->zoom *= 1.2;
-		map->posx += ((float)x - ((float)map->width / 2))
-			/ ((float)map->width * map->zoom);
-		map->posy += ((float)y - ((float)map->width / 2))
-			/ ((float)map->length * map->zoom);
+		map->posx = (float)x / (float)map->width * map->zoom + map->centerx;
+		map->posy = (float)y / (float)map->width * map->zoom + map->centery;
+		map->zoom *= .8;
+		map->centerx = .8 * (map->centerx - map->posx) + map->posx;
+		map->centery = .8 * (map->centery - map->posy) + map->posy;
+		map->iter = 100;
 		ft_goto_id(map);
 	}
 	if (key == BUTTON2)
 	{
-		if (map->zoom > .5)
-		{
-			map->zoom *= .9;
-			map->posx += ((float)x - ((float)map->width / 2))
-				/ ((float)map->width * map->zoom);
-			map->posy += ((float)y - ((float)map->width / 2))
-				/ ((float)map->length * map->zoom);
-			ft_goto_id(map);
-		}
+		map->posx = (float)x / (float)map->width * map->zoom + map->centerx;
+		map->posy = (float)y / (float)map->width * map->zoom + map->centery;
+		map->zoom *= 1.5;
+		map->centerx = 1.5 * (map->centerx - map->posx) + map->posx;
+		map->centery = 1.5 * (map->centery - map->posy) + map->posy;
+		map->iter = 100;
+		ft_goto_id(map);
 	}
 	return (0);
 }
 
 int		ft_mouse_move_hook(int x, int y, t_map *map)
 {
-	if (x < 0 || y < 0 || x >= map->width || y >= map->length
-			|| map->mousestop == 1)
+	if (x < 0 || y < 0 || x >= map->width || y >= map->length)
 		return (0);
-	map->cre = (float)x / ((float)map->width
-			* map->zoom * 1.5);
-	map->cim = (float)y / ((float)map->length
-			* map->zoom * 1.5);
+	if (map->mousestop == 0)
+	{
+		map->cre = (float)x * map->zoom * .1 / ((float)map->width);
+		map->cim = (float)y * map->zoom * .05 / ((float)map->width);
+	}
 	ft_goto_id(map);
 	return (0);
 }
