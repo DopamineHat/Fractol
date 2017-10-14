@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/05 13:06:15 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/10 03:40:23 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/14 09:22:21 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		ft_mouse_move_hook(int x, int y, t_map *map)
 
 int		ft_hook_basic_keys(int key, t_map *map)
 {
-	if (key == KEY_ESCAPE)
+	if (key == KEY_ESC)
 	{
 		mlx_destroy_window(map->mlx, map->win);
 		free(map);

@@ -6,14 +6,14 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 02:08:20 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/03 02:09:33 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/14 09:21:48 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_CODES_MACOS_H
 # define KEY_CODES_MACOS_H
 
-# define KEY_ESCAPE         53
+# define KEY_ESC            53
 # define KEY_F1             122
 # define KEY_F2             120
 # define KEY_F3             99
