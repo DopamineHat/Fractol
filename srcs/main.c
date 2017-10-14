@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 12:11:46 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/10 03:23:15 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/14 13:42:28 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static int	ft_parse_name(t_map *map, char *av1, char *av2)
 	else
 		return (1);
 	map->itermax = ft_atoi(av2);
-	ft_putnbr(map->itermax);
 	return (0);
 }
 
