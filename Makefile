@@ -6,7 +6,7 @@
 #    By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/07 03:17:48 by rpagot            #+#    #+#              #
-#    Updated: 2017/10/10 01:34:17 by rpagot           ###   ########.fr        #
+#    Updated: 2017/10/18 18:48:30 by rpagot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME := fractol
 LIBFT = libft/libft.a
 
 CFLAGS := -Ofast -march=native
-LCFLAGS := -L./minilibx_macos -lmlx -framework OpenGl -framework AppKit -Ofast -march=native
+LCFLAGS := -L./minilibx_macos -lmlx -framework OpenGl -framework AppKit \
+			-Ofast -march=native
 
 INCLUDES := -I./minilibx_macos -I./includes -I./libft
 
